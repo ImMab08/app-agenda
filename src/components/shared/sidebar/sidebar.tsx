@@ -2,8 +2,9 @@
 import type React from "react";
 import { useState } from "react";
 
-import type { SidebarConfig, MenuItem } from "@/components/types/sidebar";
 import { SidebarTooltip } from "./sidebar_tooltip";
+import type { SidebarConfig, MenuItem } from "@/components/types/sidebar";
+
 import { IconLeft, IconRight } from "@/components/icons";
 
 interface SidebarProps {
@@ -155,6 +156,7 @@ export function Sidebar({
         )}
       </div>
 
+      {/* Open and close menu */}
       <button
         onClick={handleToggleCollapse}
         className={`absolute z-50 p-1 bg-white rounded-r-md transition-all duration-300 ease-in-out bottom-13 cursor-pointer ${

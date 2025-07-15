@@ -1,9 +1,6 @@
+import SalonCalendar from "@/components/screens/dashboard/calendar_page/salon-calendar";
 import React from "react";
 
 export default function page() {
-  return (
-		<section className="w-full h-full bg-red-500">
-      hola mundo
-		</section>
-  );
+  return <SalonCalendar />;
 }

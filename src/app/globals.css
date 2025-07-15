@@ -1,3 +1,73 @@
 @import "tailwindcss";
 
+@theme {
+  /* 🌞 Tema Claro */
+  --color-primary: #2563eb;           /* Azul principal */
+  --color-secondary: #14b8a6;         /* Teal moderno */
+  --color-accent: #0ea5e9;            /* Sky 500 para detalles */
 
+  --color-background: #f9fafb;        /* Fondo general */
+  --color-surface: #ffffff;           /* Tarjetas, cajas */
+  --color-panel: #f1f5f9;             /* Fondos secundarios */
+
+  --color-text-primary: #0f172a;      /* Títulos y textos principales */
+  --color-text-secondary: #475569;    /* Subtítulos */
+  --color-text-muted: #64748b;        /* Descripciones */
+  
+  --color-selected: #e2e8f0;
+  
+  --color-block: #ededed;
+  --color-block-dark: #101828;
+
+  --color-border: #e2e8f0;            /* Bordes sutiles */
+  --color-divider: #cbd5e1;           /* Separadores */
+
+  --color-success: #22c55e;
+  --color-warning: #facc15;
+  --color-error: #ef4444;
+  --color-info: #3b82f6;
+
+  --shadow-elevation: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.dark {
+  @theme {
+    /* 🌙 Tema Oscuro */
+    --color-primary-dark: #3b82f6;
+    --color-secondary-dark: #14b8a6;
+    --color-accent-dark: #38bdf8;
+
+    --color-background-dark: #0f172a;
+    --color-surface-dark: #1e293b;
+    --color-panel-dark: #334155;
+
+    --color-text-primary-dark: #f1f5f9;
+    --color-text-secondary-dark: #94a3b8;
+    --color-text-muted: #64748b;
+
+    --color-border-dark: #475569;
+    --color-divider-dark: #334155;
+
+    --color-success: #22c55e;
+    --color-warning: #facc15;
+    --color-error: #ef4444;
+    --color-info: #3b82f6;
+
+    --shadow-elevation: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+}
+
+
+.color {
+  color: #e8e8e8;
+}
+
+/* Ocultar scrollbar */
+.no-scrollbar {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE y Edge */
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
