@@ -15,7 +15,7 @@ interface AppointmentTooltipProps {
 }
 
 // Agregar las props de callback al componente
-export function AppointmentTooltip({
+export function TooltipAppointment({
   appointment,
   position,
   isVisible,

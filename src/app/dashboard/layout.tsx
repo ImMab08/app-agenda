@@ -1,6 +1,7 @@
-import { Sidebar } from "@/components/shared/sidebar/sidebar";
+'use client'
+import { Sidebar } from "@/components/shared/sidebar/component_sidebar";
 import { salonSidebarConfig } from "@/components/config/config_siderbar";
-import { DashboardHeader } from "@/components/shared/header/dashboard_header";
+import { DashboardHeader } from "@/components/shared/header/component_dashboard_header";
 
 export default function Layout({
   children,
@@ -15,7 +16,6 @@ export default function Layout({
       <section className="w-full h-full flex flex-col">
         <div className="w-full h-24">
           <DashboardHeader /> 
-
         </div>
         {children}
       </section>

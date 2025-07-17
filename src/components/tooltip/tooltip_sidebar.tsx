@@ -8,7 +8,7 @@ interface SidebarTooltipProps {
   position: { x: number; y: number }
 }
 
-export function SidebarTooltip({ text, isVisible, position }: SidebarTooltipProps) {
+export function TooltipSidebar({ text, isVisible, position }: SidebarTooltipProps) {
   const [adjustedPosition, setAdjustedPosition] = useState(position)
 
   useEffect(() => {

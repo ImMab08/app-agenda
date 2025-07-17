@@ -1,7 +1,16 @@
-'use client'
+"use client";
 
-import { IconCalendar, IconClients, IconLogout, IconSettings, IconStats, IconUser } from "../icons"
-import type { SidebarConfig } from "../types/sidebar"
+// Importación de tipado (SidebarConfig).
+import type { SidebarConfig } from "@/components/types/sidebar";
+
+// Importación de iconos.
+import {
+  IconHome,
+  IconLogout,
+  IconCalendar,
+  IconSettings,
+} from "@/components/icons";
+
 
 export const salonSidebarConfig: SidebarConfig = {
   sections: [
@@ -11,29 +20,15 @@ export const salonSidebarConfig: SidebarConfig = {
         {
           id: "inicio",
           label: "Inicio",
-          icon: IconUser,
+          icon: IconHome,
           href: "/dashboard/home",
-          isActive: false,
         },
         {
           id: "calendario",
           label: "Calendario",
           icon: IconCalendar,
           href: "/dashboard/calendar",
-          isActive: true,
-        },
-        {
-          id: "clientes",
-          label: "Clientes",
-          icon: IconClients,
-          href: "/dashboard/clients",
-        },
-        {
-          id: "stats",
-          label: "Estadísticas",
-          icon: IconStats,
-          href: "/dashboard/reportes",
-        },
+        }
       ],
     },
     {
@@ -51,10 +46,10 @@ export const salonSidebarConfig: SidebarConfig = {
           label: "Cerrar Sesión",
           icon: IconLogout,
           onClick: () => {
-            console.log("Cerrando sesión...")
+            console.log("Cerrando sesión...");
           },
         },
       ],
     },
   ],
-}
+};

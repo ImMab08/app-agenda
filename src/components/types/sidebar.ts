@@ -1,20 +1,37 @@
-import type { ComponentType } from "react"
+import type { ComponentType } from "react";
 
 export interface MenuItem {
-  id: string
-  label: string
-  icon: ComponentType<{ className?: string }>
-  href?: string
-  onClick?: () => void
-  isActive?: boolean
+  // Obligatorio.
+  id: string;
+  label: string;
+  icon: ComponentType<{ className?: string }>;
+
+  // Opcionales
+  href?: string;
+  onClick?: () => void;
+  isActive?: boolean;
 }
 
 export interface MenuSection {
-  id: string
-  items: MenuItem[]
-  separator?: boolean
+  // Obligatorio.
+  id: string;
+  items: MenuItem[];
+
+  // Opcionales
+  separator?: boolean;
 }
 
 export interface SidebarConfig {
-  sections: MenuSection[]
+  // Obligatorio.
+  sections: MenuSection[];
+}
+
+export interface SidebarProps {
+  // Obligatorio.
+  config: SidebarConfig;
+
+  // Opcionales
+  isCollapsed?: boolean;
+  onToggleCollapse?: (collapsed: boolean) => void;
+  className?: string;
 }

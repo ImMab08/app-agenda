@@ -1,18 +1,18 @@
 "use client";
-import type React from "react";
+
+// Importación de generales.
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 
-import { SidebarTooltip } from "@/components/tooltip/sidebar_tooltip";
-import type { SidebarConfig, MenuItem } from "@/components/types/sidebar";
+// Importación de tipados.
+import type React from "react";
+import type { MenuItem, SidebarProps } from "@/components/types/sidebar";
 
+// Importación de componente (TooltipSidebar).
+import { TooltipSidebar } from "@/components/tooltip/tooltip_sidebar";
+
+// Importación de iconos.
 import { IconLeft, IconRight } from "@/components/icons";
-
-interface SidebarProps {
-  config: SidebarConfig;
-  isCollapsed?: boolean;
-  onToggleCollapse?: (collapsed: boolean) => void;
-  className?: string;
-}
 
 export function Sidebar({
   config,
@@ -20,22 +20,43 @@ export function Sidebar({
   onToggleCollapse,
   className = "",
 }: SidebarProps) {
-  
+  // Hook que devuelve la ruta actual del navegador y nos
+  // permite saber en qué página o sección nos encontramos.
+  const pathname = usePathname();
+
+  // Estado que indica si el sidebar está colapsado (true) o expandido (false).
+  // Inicialmente toma el valor de la prop 'isCollapsed'.
   const [collapsed, setCollapsed] = useState(isCollapsed);
+
+  // Estado que almacena la información del ítem actualmente "hovered"
+  // (pasado el cursor encima) cuando el sidebar está colapsado.
+  // Guarda el texto del ítem y su posición en la pantalla para mostrar un tooltip.
   const [hoveredItem, setHoveredItem] = useState<{
     text: string;
     position: { x: number; y: number };
   } | null>(null);
 
+  // Filtra las secciones principales del sidebar, es decir,
+  // aquellas que NO tienen separador (separator === false).
   const mainSections = config.sections.filter((s) => !s.separator);
+
+  // Filtra las secciones del pie del sidebar, es decir,
+  // aquellas que SÍ tienen separador (separator === true).
   const footerSections = config.sections.filter((s) => s.separator);
 
+  // === FUNCIONES ===
+  // Cambia el estado de colapsado del sidebar.
+  // Si estaba expandido, lo colapsa, y viceversa.
+  // También ejecuta una función opcional `onToggleCollapse` si fue proporcionada.
   const handleToggleCollapse = () => {
     const newCollapsed = !collapsed;
     setCollapsed(newCollapsed);
-    onToggleCollapse?.(newCollapsed);
+    onToggleCollapse?.(newCollapsed); // operador opcional
   };
 
+  // Maneja el evento de hover (pasar el mouse por encima) sobre un ítem.
+  // Si el sidebar está colapsado, calcula la posición del ítem en pantalla
+  // y guarda su información para mostrar un tooltip contextual.
   const handleItemHover = (item: MenuItem, event: React.MouseEvent) => {
     if (collapsed) {
       const rect = event.currentTarget.getBoundingClientRect();
@@ -49,6 +70,9 @@ export function Sidebar({
     }
   };
 
+  // Maneja el evento de clic sobre un ítem del menú.
+  // Si el ítem tiene definida una función `onClick`, la ejecuta.
+  // En caso contrario, si tiene una URL (`href`), navega hacia esa ruta.
   const handleItemClick = (item: MenuItem) => {
     if (item.onClick) {
       item.onClick();
@@ -96,9 +120,9 @@ export function Sidebar({
                     className={`
                       w-full flex items-center gap-2 px-3 py-2 rounded-md transition-colors text-left cursor-pointer
                       ${
-                        item.isActive
+                        pathname === item.href
                           ? "bg-blue-50 text-primary"
-                          : "text-gray-700 hover:bg-gray-100"
+                          : "text-gray-700 hover:bg-gray-100 hover:border-l-2 hover:border-primary"
                       }
                       ${collapsed ? "justify-center" : ""}
                     `}
@@ -135,9 +159,9 @@ export function Sidebar({
                     className={`
                       w-full flex items-center gap-2 px-3 py-2 rounded-md transition-colors text-left cursor-pointer
                       ${
-                        item.isActive
+                        pathname === item.href
                           ? "bg-blue-50 text-blue-700"
-                          : "text-gray-700 hover:bg-gray-100"
+                          : "text-gray-700 hover:bg-gray-100 hover:border-l-2 hover:border-primary"
                       }
                       ${collapsed ? "justify-center" : ""}
                     `}
@@ -173,7 +197,7 @@ export function Sidebar({
 
       {/* Tooltip */}
       {hoveredItem && (
-        <SidebarTooltip
+        <TooltipSidebar
           isVisible={true}
           text={hoveredItem.text}
           position={hoveredItem.position}

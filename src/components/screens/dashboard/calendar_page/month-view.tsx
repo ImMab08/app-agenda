@@ -4,7 +4,7 @@ import type React from "react"
 import { useState } from "react"
 
 import type { Appointment } from "@/components/types/appoitments"
-import { AppointmentTooltip } from "@/components/tooltip/appointment-tooltip"
+import { TooltipAppointment } from "@/components/tooltip/tooltip_appointment"
 
 import { MONTHS, DAYS, getDaysInMonth, formatDate } from "@/components/utils/calendar"
 
@@ -187,7 +187,7 @@ export function MonthView({
 
       {/* Tooltip */}
       {hoveredAppointment && (
-        <AppointmentTooltip
+        <TooltipAppointment
           appointment={hoveredAppointment.appointment}
           position={hoveredAppointment.position}
           isVisible={true}
