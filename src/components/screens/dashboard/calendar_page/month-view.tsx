@@ -3,8 +3,8 @@
 import type React from "react"
 import { useState } from "react"
 
-import { AppointmentTooltip } from "./appointment-tooltip"
 import type { Appointment } from "@/components/types/appoitments"
+import { AppointmentTooltip } from "@/components/tooltip/appointment-tooltip"
 
 import { MONTHS, DAYS, getDaysInMonth, formatDate } from "@/components/utils/calendar"
 

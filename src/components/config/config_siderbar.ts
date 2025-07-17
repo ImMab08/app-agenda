@@ -12,7 +12,7 @@ export const salonSidebarConfig: SidebarConfig = {
           id: "inicio",
           label: "Inicio",
           icon: IconUser,
-          href: "/dashboard/",
+          href: "/dashboard/home",
           isActive: false,
         },
         {

@@ -2,7 +2,7 @@
 import type React from "react";
 import { useState } from "react";
 
-import { SidebarTooltip } from "./sidebar_tooltip";
+import { SidebarTooltip } from "@/components/tooltip/sidebar_tooltip";
 import type { SidebarConfig, MenuItem } from "@/components/types/sidebar";
 
 import { IconLeft, IconRight } from "@/components/icons";
@@ -20,6 +20,7 @@ export function Sidebar({
   onToggleCollapse,
   className = "",
 }: SidebarProps) {
+  
   const [collapsed, setCollapsed] = useState(isCollapsed);
   const [hoveredItem, setHoveredItem] = useState<{
     text: string;
@@ -77,13 +78,13 @@ export function Sidebar({
           </div>
         </div>
 
-        {/* === MENU SECTIONS === */}
-        {/* Main section */}
+        {/* === Sección del menú navegable === */}
+        {/* Contenedor principal */}
         <div className="flex-1">
           {mainSections.map((section, sectionIndex) => (
             <div key={section.id}>
               {section.separator && sectionIndex > 0 && (
-                <div className="border-t border-gray-200 my-2" />
+                <div className="border-t border-border my-2" />
               )}
               <div className="p-2">
                 {section.items.map((item) => (
@@ -96,7 +97,7 @@ export function Sidebar({
                       w-full flex items-center gap-2 px-3 py-2 rounded-md transition-colors text-left cursor-pointer
                       ${
                         item.isActive
-                          ? "bg-blue-50 text-blue-700"
+                          ? "bg-blue-50 text-primary"
                           : "text-gray-700 hover:bg-gray-100"
                       }
                       ${collapsed ? "justify-center" : ""}
@@ -119,7 +120,7 @@ export function Sidebar({
           ))}
         </div>
 
-        {/* Footer section */}
+        {/* Contenedor del footer */}
         {footerSections.some((section) => section.separator) && (
           <div className="border-t border-gray-200 p-2">
             {config.sections
@@ -156,10 +157,10 @@ export function Sidebar({
         )}
       </div>
 
-      {/* Open and close menu */}
+      {/* Abrir o contraer el menú lateral */}
       <button
         onClick={handleToggleCollapse}
-        className={`absolute z-50 p-1 bg-white rounded-r-md transition-all duration-300 ease-in-out bottom-13 cursor-pointer ${
+        className={`absolute z-50 p-1 bg-white shadow-2xs rounded-r-md transition-all duration-300 ease-in-out bottom-13 cursor-pointer ${
           collapsed ? "left-16" : "left-64"
         }`}
       >

@@ -13,8 +13,11 @@ export default function Layout({
         <Sidebar config={salonSidebarConfig} />
       </section>
       <section className="w-full h-full flex flex-col">
-          <DashboardHeader />
-          {children}
+        <div className="w-full h-24">
+          <DashboardHeader /> 
+
+        </div>
+        {children}
       </section>
     </main>
   );

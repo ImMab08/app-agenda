@@ -4,9 +4,11 @@ import { useState } from "react";
 import type { Appointment } from "@/components/types/appoitments";
 import { MonthView } from "./month-view";
 import { WeekView } from "./week-view";
-import { AddAppointmentModal } from "./add-appointment-modal";
+
 import { formatDate } from "@/components/utils/calendar";
-import { DayAppointmentsModal } from "./day-appointments-modal";
+import { AddAppointmentModal } from "@/components/modals/add-appointment-modal";
+import { DayAppointmentsModal } from "@/components/modals/day-appointments-modal";
+
 import { IconAdd, IconCalendar } from "@/components/icons";
 
 export default function SalonCalendar() {

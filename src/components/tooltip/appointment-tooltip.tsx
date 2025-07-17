@@ -1,7 +1,8 @@
 "use client"
-
 import { useState, useEffect } from "react"
+
 import type { Appointment } from "@/components/types/appoitments"
+
 import { IconCalendar, IconClock, IconInfo, IconPhone, IconUser } from "@/components/icons"
 
 interface AppointmentTooltipProps {
