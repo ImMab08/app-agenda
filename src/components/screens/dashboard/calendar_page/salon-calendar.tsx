@@ -174,6 +174,7 @@ export default function SalonCalendar() {
           onSave={handleAddAppointment}
           selectedDate={selectedDate}
           selectedTime={selectedTime}
+          editingAppointment={editingAppointment}
         />
 
         <DayAppointmentsModal

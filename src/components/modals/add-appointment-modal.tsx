@@ -19,9 +19,10 @@ import {
 interface AddAppointmentModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onSave: (appointment: Omit<Appointment, "id">) => void;
   selectedDate?: Date;
   selectedTime?: string;
+  editingAppointment: Appointment | null;
+  onSave: (appointment: Omit<Appointment, "id">) => void;
 }
 
 export function AddAppointmentModal({
