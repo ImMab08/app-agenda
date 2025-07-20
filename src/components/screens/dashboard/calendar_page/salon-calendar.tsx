@@ -12,7 +12,8 @@ import { DayAppointmentsModal } from "@/components/modals/day-appointments-modal
 import { IconAdd, IconCalendar } from "@/components/icons";
 
 export default function SalonCalendar() {
-  const [view, setView] = useState<"month" | "week">("week"); // Cambiar a "week"
+  const [view, setView] = useState<"month" | "week">("week");
+
   const [appointments, setAppointments] = useState<Appointment[]>([
     {
       id: "1",
@@ -46,13 +47,9 @@ export default function SalonCalendar() {
   const [isDayModalOpen, setIsDayModalOpen] = useState(false);
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
   const [selectedTime, setSelectedTime] = useState<string>("09:00");
-  const [selectedDayAppointments, setSelectedDayAppointments] = useState<
-    Appointment[]
-  >([]);
-  const [editingAppointment, setEditingAppointment] =
-    useState<Appointment | null>(null);
+  const [selectedDayAppointments, setSelectedDayAppointments] = useState<Appointment[]>([]);
+  const [editingAppointment, setEditingAppointment] = useState<Appointment | null>(null);
 
-  // Agregar funciones para manejar las acciones:
   const handleConfirmAppointment = (appointmentId: string) => {
     setAppointments((prev) =>
       prev.map((apt) =>
@@ -103,6 +100,11 @@ export default function SalonCalendar() {
     setSelectedDate(date);
     setSelectedTime(time);
     setIsModalOpen(true);
+  };
+
+  // Esta función intermedia resuelve el error de tipos con MonthView
+  const handleDateClickFromMonthView = (date: Date) => {
+    handleTimeSlotClick(date, "09:00"); // Puedes cambiar la hora por defecto
   };
 
   return (
@@ -157,7 +159,7 @@ export default function SalonCalendar() {
           <MonthView
             appointments={appointments}
             onDateSelect={handleDateSelect}
-            onAddAppointment={handleTimeSlotClick}
+            onAddAppointment={handleDateClickFromMonthView} // <-- función intermedia
             onShowDayAppointments={handleShowDayAppointments}
             onConfirmAppointment={handleConfirmAppointment}
             onCancelAppointment={handleCancelAppointment}
