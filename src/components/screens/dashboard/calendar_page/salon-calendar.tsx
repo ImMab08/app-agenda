@@ -109,11 +109,11 @@ export default function SalonCalendar() {
     <div className="p-4 h-full overflow-hidden">
       <div className="h-full flex flex-col">
         {/* Controls */}
-        <div className="bg-background flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 gap-4">
-          <div className="flex items-center gap-2">
+        <div className="bg-background flex justify-between md:flex-row md:items-center mb-4 md:mb-6 gap-4">
+          <div className="flex items-center gap-1 md:gap-2">
             <button
               onClick={() => setView("week")}
-              className={`px-4 py-2 rounded-md transition-colors cursor-pointer ${
+              className={`px-2 md:px-4 py-1 md:py-2 rounded-md transition-colors cursor-pointer flex items-center ${
                 view === "week"
                   ? "bg-blue-600 text-white"
                   : "bg-surface text-text-secondary hover:bg-panel"
@@ -124,7 +124,7 @@ export default function SalonCalendar() {
             </button>
             <button
               onClick={() => setView("month")}
-              className={`px-4 py-2 rounded-md transition-colors cursor-pointer ${
+              className={`px-2 md:px-4 py-1 md:py-2 rounded-md transition-colors cursor-pointer flex items-center ${
                 view === "month"
                   ? "bg-blue-600 text-white"
                   : "bg-surface text-text-primary hover:bg-panel"
@@ -137,7 +137,7 @@ export default function SalonCalendar() {
 
           <button
             onClick={() => setIsModalOpen(true)}
-            className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-md transition-colors flex items-center gap-2 cursor-pointer"
+            className="bg-blue-600 hover:bg-blue-700 text-white px-2 md:px-6 py-1 md:py-2 rounded-md transition-colors flex items-center gap-1 md:gap-2 cursor-pointer"
           >
             <IconAdd className="w-4 h-4" />
             Nueva Cita

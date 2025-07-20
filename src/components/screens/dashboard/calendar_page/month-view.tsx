@@ -79,11 +79,11 @@ export function MonthView({
   return (
     <div className="bg-background rounded-lg shadow-lg flex flex-col h-full overflow-auto">
       {/* Header */}
-      <div className="flex items-center justify-between p-6 border-b border-border">
-        <h2 className="text-2xl font-bold text-text-primary">
+      <div className="flex items-center justify-between p-3 md:p-6 border-b bg-surface border-border">
+        <h2 className="text-xl md:text-2xl font-bold text-text-primary">
           {MONTHS[month]} {year}
         </h2>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1 md:gap-2">
           <button
             onClick={() => navigateMonth("prev")}
             className="p-2 text-text-secondary hover:text-text-primary hover:bg-selected rounded-md transition-colors cursor-pointer"

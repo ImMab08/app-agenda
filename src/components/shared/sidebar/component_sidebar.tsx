@@ -17,17 +17,17 @@ import { IconLeft, IconRight } from "@/components/icons";
 export function Sidebar({
   config,
   isCollapsed = false,
-  onToggleCollapse,
-  className = "",
 }: SidebarProps) {
+
+  
   // Hook que devuelve la ruta actual del navegador y nos
   // permite saber en qué página o sección nos encontramos.
   const pathname = usePathname();
-
+  
   // Estado que indica si el sidebar está colapsado (true) o expandido (false).
   // Inicialmente toma el valor de la prop 'isCollapsed'.
   const [collapsed, setCollapsed] = useState(isCollapsed);
-
+  
   // Estado que almacena la información del ítem actualmente "hovered"
   // (pasado el cursor encima) cuando el sidebar está colapsado.
   // Guarda el texto del ítem y su posición en la pantalla para mostrar un tooltip.
@@ -35,23 +35,21 @@ export function Sidebar({
     text: string;
     position: { x: number; y: number };
   } | null>(null);
-
+  
   // Filtra las secciones principales del sidebar, es decir,
   // aquellas que NO tienen separador (separator === false).
   const mainSections = config.sections.filter((s) => !s.separator);
-
+  
   // Filtra las secciones del pie del sidebar, es decir,
   // aquellas que SÍ tienen separador (separator === true).
   const footerSections = config.sections.filter((s) => s.separator);
-
+  
   // === FUNCIONES ===
   // Cambia el estado de colapsado del sidebar.
   // Si estaba expandido, lo colapsa, y viceversa.
-  // También ejecuta una función opcional `onToggleCollapse` si fue proporcionada.
   const handleToggleCollapse = () => {
     const newCollapsed = !collapsed;
     setCollapsed(newCollapsed);
-    onToggleCollapse?.(newCollapsed); // operador opcional
   };
 
   // Maneja el evento de hover (pasar el mouse por encima) sobre un ítem.
@@ -85,9 +83,8 @@ export function Sidebar({
     <>
       <div
         className={`
-          bg-white flex flex-col transition-all duration-300 ease-in-out h-screen shadow-2xl
+          flex bg-white flex-col transition-all duration-300 ease-in-out h-screen shadow-2xl
           ${collapsed ? "w-16" : "w-64"}
-          ${className}
         `}
       >
         {/* Header */}

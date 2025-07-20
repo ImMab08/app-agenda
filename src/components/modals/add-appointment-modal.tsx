@@ -91,7 +91,7 @@ export function AddAppointmentModal({
 
         <form
           onSubmit={handleSubmit}
-          className="p-6 space-y-4 h-full flex flex-col overflow-auto"
+          className="p-4 md:p-6 space-y-4 h-full flex flex-col overflow-auto"
         >
           <div>
             <label className="block text-base font-medium text-text-primary mb-2">

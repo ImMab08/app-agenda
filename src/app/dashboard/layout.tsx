@@ -10,11 +10,11 @@ export default function Layout({
 }>) {
   return (
     <main className="flex h-screen bg-gray-100/80">
-      <section>
+      <section className="hidden xl:block">
         <Sidebar config={salonSidebarConfig} />
       </section>
       <section className="w-full h-full flex flex-col">
-        <div className="w-full h-24">
+        <div className="w-full ">
           <DashboardHeader /> 
         </div>
         {children}

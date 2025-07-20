@@ -1,6 +1,7 @@
 // Icons communication
 export * from './communication/icon_add'
 export * from './communication/icon_user'
+export * from './communication/icon_menu'
 export * from './communication/icon_load'
 export * from './communication/icon_left'
 export * from './communication/icon_info'

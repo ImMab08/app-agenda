@@ -87,14 +87,18 @@ export function WeekView({
   };
 
   return (
-    <div className="bg-background rounded-lg shadow-lg h-full overflow-auto flex flex-col">
+    <div className="bg-background rounded-lg shadow-lg h-full overflow-auto flex flex-col w-full">
       {/* Header */}
-      <div className="flex items-center justify-between p-6 border-b border-border bg-surface">
+      <div className="w-full flex items-center justify-between p-3 md:p-6 border-b bg-surface border-border">
         <div className="flex flex-col">
-          <h2 className="text-text-secondary text-base">{MONTHS[month]} {year}</h2>
-          <h3 className="text-2xl font-bold text-text-primary">Vista Semanal</h3>
+          <h2 className="text-text-secondary text-sm md:text-base">
+            {MONTHS[month]} {year}
+          </h2>
+          <h3 className="text-xl md:text-2xl font-bold text-text-primary">
+            Vista Semanal
+          </h3>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1 md:gap-2">
           <button
             onClick={() => navigateWeek("prev")}
             className="p-2 text-text-secondary hover:text-text-primary hover:bg-selected rounded-md transition-colors cursor-pointer"
@@ -103,9 +107,9 @@ export function WeekView({
           </button>
           <button
             onClick={() => setCurrentDate(new Date())}
-            className="px-3 py-1 text-sm text-text-secondary hover:text-text-primary hover:bg-selected rounded-md transition-colors cursor-pointer"
+            className="px-1 sm:px-3 py-1 text-sm text-text-secondary hover:text-text-primary hover:bg-selected rounded-md transition-colors cursor-pointer"
           >
-            Esta Semana
+            Esta semana
           </button>
           <button
             onClick={() => navigateWeek("next")}
@@ -116,107 +120,112 @@ export function WeekView({
         </div>
       </div>
 
-      {/* Week days header */}
-      <div className="grid [grid-template-columns:120px_repeat(7,1fr)] border-b border-border">
-        <div className="p-4 text-center flex justify-center items-center text-sm font-medium text-text-primary">
-          Hora
-        </div>
-        {weekDays.map((date, index) => (
-          <div
-            key={index}
-            className={`p-4 text-center border-l border-border ${
-              isToday(date) ? "bg-selected" : ""
-            }`}
-          >
-            <div
-              className={`text-sm font-medium ${
-                isToday(date) ? "text-primary" : "text-text-secondary"
-              }`}
-            >
-              {FULL_DAYS[date.getDay()]}
+      {/* Calendar grid scrollable */}
+      <div className="overflow-auto w-full h-full relative">
+        <div className="min-w-[1000px] min-h-full">
+          {/* Sticky Header de días */}
+          <div className="grid [grid-template-columns:120px_repeat(7,1fr)] border-b border-border bg-background sticky top-0 z-10">
+            <div className="p-2 md:p-4 text-center flex justify-center items-center text-sm font-medium text-text-primary bg-background border-r border-border">
+              Hora
             </div>
-            <div
-              className={`text-lg font-bold ${
-                isToday(date) ? "text-primary" : "text-text-secondary"
-              }`}
-            >
-              {date.getDate()}
-            </div>
-          </div>
-        ))}
-      </div>
-
-      {/* Time slots and appointments */}
-      <div className="h-full overflow-auto no-scrollbar flex flex-col">
-        {TIME_SLOTS.map((timeSlot) => (
-          <div
-            key={timeSlot.hour}
-            className="grid [grid-template-columns:120px_repeat(7,1fr)] border-b border-border"
-          >
-            <div className="p-3 text-sm text-text-primary flex items-center justify-center">
-              {formatTimeSlot(timeSlot.hour)}
-            </div>
-            {weekDays.map((date, dayIndex) => {
-              const dayAppointments = getAppointmentsForDateTime(
-                date,
-                timeSlot.hour
-              );
-
-              return (
+            {weekDays.map((date, index) => (
+              <div
+                key={index}
+                className={`p-2 md:p-4 text-center border-l border-border ${
+                  isToday(date) ? "bg-selected" : "bg-background"
+                }`}
+              >
                 <div
-                  key={dayIndex}
-                  className={`
-                    min-h-16 p-1 border-l border-border relative group cursor-pointer
-                    hover:bg-selected hover:border-divider hover:border transition-colors
-                    ${isToday(date) ? "bg-selected/40" : ""}
-                  `}
-                  onClick={() =>
-                    onAddAppointment(
-                      date,
-                      `${timeSlot.hour.toString().padStart(2, "0")}:00`
-                    )
-                  }
+                  className={`text-sm font-medium ${
+                    isToday(date) ? "text-primary" : "text-text-secondary"
+                  }`}
                 >
-                  <div className="space-y-1">
-                    {dayAppointments.slice(0, 2).map((appointment, index) => (
-                      <div
-                        key={appointment.id}
-                        className={`
-                          p-1 rounded text-xs text-text-primary cursor-pointer
-                          ${
-                            appointment.color
-                          } hover:opacity-80 transition-opacity
-                          ${index > 0 ? "mt-1" : ""}
-                        `}
-                        onMouseEnter={(e) =>
-                          handleAppointmentHover(appointment, e)
-                        }
-                        onMouseLeave={() => setHoveredAppointment(null)}
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleAppointmentHover(appointment, e);
-                        }}
-                      >
-                        <div className="font-medium truncate">
-                          {appointment.client}
-                        </div>
-                        <div className="truncate opacity-90">
-                          {appointment.service}
-                        </div>
-                      </div>
-                    ))}
-
-                    {dayAppointments.length > 2 && (
-                      <div className="text-xs text-surface text-center bg-primary rounded p-1 cursor-pointer">
-                        +{dayAppointments.length - 2} citas más
-                      </div>
-                    )}
-                  </div>
+                  {FULL_DAYS[date.getDay()]}
                 </div>
-              );
-            })}
+                <div
+                  className={`text-lg font-bold ${
+                    isToday(date) ? "text-primary" : "text-text-secondary"
+                  }`}
+                >
+                  {date.getDate()}
+                </div>
+              </div>
+            ))}
           </div>
-        ))}
+
+          {/* Time slots */}
+          <div className="h-full overflow-y-auto no-scrollbar flex flex-col overflow-x-hidden">
+            {TIME_SLOTS.map((timeSlot) => (
+              <div
+                key={timeSlot.hour}
+                className="grid [grid-template-columns:120px_repeat(7,1fr)] border-b border-border min-h-[60px]"
+              >
+                {/* Hora sticky solo en scroll vertical */}
+                <div className="p-3 text-sm text-text-primary flex items-center justify-center bg-background border-r border-border ">
+                  {formatTimeSlot(timeSlot.hour)}
+                </div>
+
+                {weekDays.map((date, dayIndex) => {
+                  const dayAppointments = getAppointmentsForDateTime(
+                    date,
+                    timeSlot.hour
+                  );
+
+                  return (
+                    <div
+                      key={dayIndex}
+                      className={`min-h-16 p-1 border-l border-border relative group cursor-pointer
+                  hover:bg-selected hover:border-divider hover:border transition-colors
+                  ${isToday(date) ? "bg-selected/40" : ""}
+                `}
+                      onClick={() =>
+                        onAddAppointment(
+                          date,
+                          `${timeSlot.hour.toString().padStart(2, "0")}:00`
+                        )
+                      }
+                    >
+                      <div className="space-y-1">
+                        {dayAppointments
+                          .slice(0, 2)
+                          .map((appointment, index) => (
+                            <div
+                              key={appointment.id}
+                              className={`p-1 rounded text-xs text-text-primary cursor-pointer
+                        ${appointment.color} hover:opacity-80 transition-opacity
+                        ${index > 0 ? "mt-1" : ""}
+                      `}
+                              onMouseEnter={(e) =>
+                                handleAppointmentHover(appointment, e)
+                              }
+                              onMouseLeave={() => setHoveredAppointment(null)}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                handleAppointmentHover(appointment, e);
+                              }}
+                            >
+                              <div className="font-medium truncate">
+                                {appointment.client}
+                              </div>
+                              <div className="truncate opacity-90">
+                                {appointment.service}
+                              </div>
+                            </div>
+                          ))}
+
+                        {dayAppointments.length > 2 && (
+                          <div className="text-xs text-surface text-center bg-primary rounded p-1 cursor-pointer">
+                            +{dayAppointments.length - 2} citas más
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
 
       {/* Tooltip */}

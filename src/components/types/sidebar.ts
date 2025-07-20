@@ -1,4 +1,5 @@
 import type { ComponentType } from "react";
+import { ModalProps } from "./open_modal";
 
 export interface MenuItem {
   // Obligatorio.
@@ -32,6 +33,5 @@ export interface SidebarProps {
 
   // Opcionales
   isCollapsed?: boolean;
-  onToggleCollapse?: (collapsed: boolean) => void;
-  className?: string;
+  isOpenModal?: ModalProps;
 }
