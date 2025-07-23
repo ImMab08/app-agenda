@@ -9,8 +9,8 @@ export default function Layout({
   children: React.ReactNode;
 }>) {
   return (
-    <main className="flex h-screen bg-gray-100/80">
-      <section className="hidden xl:block">
+    <main className="flex h-screen bg-gray-100/80 overflow-hidden">
+      <section className="hidden xl:block border border-border">
         <Sidebar config={salonSidebarConfig} />
       </section>
       <section className="w-full h-full flex flex-col">

@@ -83,7 +83,7 @@ export function Sidebar({
     <>
       <div
         className={`
-          flex bg-white flex-col transition-all duration-300 ease-in-out h-screen shadow-2xl
+          flex bg-surface flex-col transition-all duration-300 ease-in-out h-screen
           ${collapsed ? "w-16" : "w-64"}
         `}
       >
